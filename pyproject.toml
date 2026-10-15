@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deus-pbft-consensus"
+version = "0.1.0"
+description = "Zero-dependency Practical Byzantine Fault Tolerance consensus engine for local AI agent workforces (US7149896B2)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Deus Intus Ltd", email = "engineering@deusintus.com" }
+]
+keywords = ["byzantine-fault-tolerance", "pbft", "agent-governance", "consensus", "local-ai", "mcp"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Security :: Cryptography"
+]
+
+[project.urls]
+Homepage = "https://github.com/deus-intus/deus-pbft-consensus"
+Commercial = "https://deusintus.co.uk/solutions/sovereign-fabric"
