@@ -1,74 +1,93 @@
+<div align="center">
+
+```
+  ____  _____ _   _ ____    ___ _   _ _____ _   _ ____  
+ |  _ \| ____| | | / ___|  |_ _| \ | |_   _| | | / ___| 
+ | | | |  _| | | | \___ \   | ||  \| | | | | | | \___ \ 
+ | |_| | |___| |_| |___) |  | || |\  | | | | |_| |___) |
+ |____/|_____|\___/|____/  |___|_| \_| |_|  \___/|____/ 
+```
+
+### **TECHNOLOGY · PEOPLE · A HIGHER TOMORROW**
+**DEUS INTUS // DEVELOPER ARM** — *Brand System v1.0*  
+*Digital systems, products, and infrastructure.*
+
+---
+</div>
+
+> **Elevator Line:** *"We build intelligent systems, products, and infrastructure that help ideas become operational reality."*
+
 # 🛡️ Deus PBFT Consensus (`deus-pbft-consensus`)
-**Zero-dependency Practical Byzantine Fault Tolerance consensus state machine for local AI agent workforces.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Statutory Status: Public Domain](https://img.shields.io/badge/Statutory%20IP-Expired%20Public%20Domain-brightgreen.svg)](https://patents.google.com/patent/US7149896B2/en)
+> **Zero-dependency Practical Byzantine Fault Tolerance consensus state machine for local AI agent workforces.**
 
----
-
-## 🏛️ The Algorithmic Origin: 2004 Math Meets 2026 Agent Governance
-
-Autonomous AI agents executing shell scripts, transferring funds, or writing production code cannot rely on ungrounded single-model outputs. They require **mathematical consensus**.
-
-`deus-pbft-consensus` implements the core state machine from **US Patent 7,149,896 B2** (*"Byzantine fault-tolerant state-machine replication in distributed asynchronous networks"*, filed Oct 27, 2004, expired Oct 27, 2024 by IBM).
-
-It guarantees that high-stakes autonomous actions cannot execute unless a quorum of independent local agent validator nodes ($2f + 1$ out of $3f + 1$) cryptographically verify and sign the proposed action digest.
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-0A57D6.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-33CFFF.svg)](https://opensource.org/licenses/MIT)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(pure%20stdlib)-33CFFF.svg)](#)
+[![Model Agnostic](https://img.shields.io/badge/AI-Model%20Agnostic-031B4E.svg)](./AGENT_SETUP.md)
+[![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Walkthrough%20Notebook-EAF4FF.svg)](./walkthrough.ipynb)
 
 ---
 
-## 🚀 Quickstart
+## 1. What This Is
+Deus PBFT Consensus is a sovereign multi-agent coordination protocol written in pure standard-library Python. It provides mathematical fault tolerance ($N \ge 3f + 1$) for autonomous agent swarms, ensuring no single malfunctioning or hallucinating agent can unilaterally mutate production state.
 
-### 1. Installation
-Pure standard-library Python. Zero external dependencies.
+## 2. Who It Is For
+- **Multi-Agent Architects:** Coordinating agent swarms (Coders, Creators, Verifiers) that require cryptographic consensus before committing changes.
+- **Autonomous Financial Systems:** Enforcing quorum approval on fund transfers, escrow releases, and smart contracts.
+- **Enterprise DevOps:** Multi-node consensus verification without heavyweight blockchain or distributed database overhead.
+
+## 3. Current Status
+**Production / Standalone Sovereign Package.** Verified state machine supporting Pre-Prepare, Prepare, and Commit three-phase voting cycles.
+
+## 4. What Works Now vs Planned
+### What Works Now:
+- Full Practical Byzantine Fault Tolerance state machine ($N=4$, tolerates $f=1$ faulty node).
+- Multi-phase quorum voting with cryptographic block hashing.
+- 1-Click quickstart execution via `python3 quickstart.py`.
+- Interactive Jupyter Notebook walkthrough in [`walkthrough.ipynb`](./walkthrough.ipynb).
+- Model-agnostic swarm coordination schemas in [`AGENT_SETUP.md`](./AGENT_SETUP.md).
+
+### Planned:
+- Dynamic node cluster discovery over Tailscale/local network sockets.
+
+## 5. How to View or Use It (30-Second Quickstart)
+No installation required! Zero external pip dependencies:
+
 ```bash
-pip install -e .
+# 1. Clone the repository
+git clone https://github.com/deus-intus/deus-pbft-consensus.git
+cd deus-pbft-consensus
+
+# 2. Run the 1-click simulation
+python3 quickstart.py
+
+# 3. Run the unit test suite
+python3 -m unittest test_module.py
 ```
 
-### 2. Python Usage
-```python
-from module import DeusSovereignFabric
+## 6. What Is in the Repository
+- `module.py` — `DeusSovereignFabric` consensus state machine and node cluster logic.
+- `quickstart.py` — 30-second runnable demo simulating 4 nodes and 1 Byzantine fault.
+- `walkthrough.ipynb` — Visual Jupyter Notebook execution trace.
+- `AGENT_SETUP.md` — Swarm consensus schemas for Gemini, Claude, OpenAI, and Ollama agents.
+- `test_module.py` — Full unit test suite.
 
-# Initialize a 4-node Byzantine consensus fabric (tolerates 1 rogue/hallucinating node)
-fabric = DeusSovereignFabric(total_nodes=4)
+## 7. Model-Agnostic Swarm Coordination
+Any agent persona can submit proposals or participate in voting rounds via standard JSON tool calls. Full schemas are provided in [`AGENT_SETUP.md`](./AGENT_SETUP.md).
 
-# Simulate a high-stakes agent proposal
-action = "DATABASE_MIGRATION"
-target = "PRODUCTION_POSTGRES"
-payload = "ALTER TABLE users ADD COLUMN verified_at TIMESTAMP;"
+## 8. Connections and Requirements
+- Python 3.9 or higher (pure standard library).
+- Zero external runtime packages.
 
-result = fabric.verify_and_execute(action, target, payload)
-
-print(f"Status: {result['status']}")
-print(f"Consensus Reached: {result['consensus_reached']}")
-print(f"Votes: {result['votes_collected']} / Quorum Required: {result['quorum_required']}")
-```
-
-Output:
-```
-Status: EXECUTED_SOVEREIGN
-Consensus Reached: True
-Votes: 4 / Quorum Required: 3
-```
+## 9. License and Contribution Information
+Licensed under the permissive [MIT License](./LICENSE). Copyright © Deus Intus Ltd.
 
 ---
 
-## 💼 Need Enterprise Air-Gapped Multi-Agent Governance?
+## 🛡️ Intellectual Property & Statutory UK Trade Mark Notice
 
-While `deus-pbft-consensus` is an open-source primitive for multi-agent validation, **Deus Intus Ltd** provides the **Deus SovereignFabric™ Enterprise Edition**:
-
-| Feature | Open-Source (`deus-pbft-consensus`) | SovereignFabric™ Enterprise |
-|---|:---:|:---:|
-| **Quorum** | In-Memory Simulation | Networked Cross-Device Daemon Quorum |
-| **Signing** | SHA-256 Mock Signatures | Hardware Enclave & Ed25519 Threshold Keys |
-| **Audit Trail** | Return Dictionary | Immutable Local Merkle Audit Ledger |
-| **Model Guard** | Generic Payload String | Real-Time Local Neural Evaluation (Qwen 2.5 / Llama) |
-| **Pricing** | **Free / MIT Open Source** | **£25,000 One-Time Perpetual Buyout** |
-| **Displacement** | Replaces custom try-except loops | **Eliminates £50,000/yr Copilot Studio + LangSmith** |
-
-👉 **[Explore Sovereign Enterprise Licensing & Case Studies](https://deusintus.co.uk/solutions/sovereign-fabric)**
-
----
-
-## 📜 License
-MIT License. Copyright (c) 2026 Deus Intus Ltd (UK Company No. 17209569).
+- **Registered UK Trade Mark:** `DEUS INTUS®` is a registered trade mark of **Deus Intus Ltd** in the United Kingdom under **UK Trade Mark No. UK00004416539**. All rights reserved.
+- **Corporate Registration:** Deus Intus Ltd is a company registered in England and Wales (Company No. `17209569`), Registered Office: `66 Paul Street, London, EC2A 4NA, United Kingdom`.
+- **Statutory IP Architecture:** Software primitives synthesized by Deus Intus combine 20-year statutory public-domain algorithmic cores with modern permissive runtimes into zero-dependency, model-agnostic, sovereign software modules.
+- **Support & Inquiries:** Official support at [`support@deusintus.com`](mailto:support@deusintus.com).
