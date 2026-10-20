@@ -12,21 +12,31 @@ def main():
 
     # 1. Initialize a 4-node consensus fabric (tolerates f=1 Byzantine fault)
     fabric = DeusSovereignFabric(total_nodes=4)
-    print("✓ Initialized 4-Node Sovereign Fabric (N=4, f=1 tolerance)")
+    total_nodes = len(fabric.nodes)
+    print(f"✓ Initialized {total_nodes}-Node Sovereign Fabric "
+          f"(N={total_nodes}, f={fabric.f} tolerance, quorum={fabric.quorum_threshold})")
 
-    # 2. Propose a transaction
     tx_action = "SET_CAPABILITY_STATE"
     tx_target = "LOCAL_MODEL_ROUTER"
     tx_payload = "mode=sovereign_mesh&status=verified"
 
-    print(f"\n🗳️ Proposing Transaction: [{tx_action}] on {tx_target}")
+    # 2. Healthy round — all nodes honest, consensus should be reached.
+    print(f"\n🗳️  Scenario A — Healthy fabric: [{tx_action}] on {tx_target}")
     result = fabric.verify_and_execute(tx_action, tx_target, tx_payload)
-
-    print("\nConsensus Outcome:")
+    print(f"  • Votes Collected:   {result['votes_collected']} / {total_nodes}")
+    print(f"  • Quorum Required:   {result['quorum_required']}")
     print(f"  • Consensus Reached: {result['consensus_reached']}")
-    print(f"  • Commit Votes:      {result['commit_votes']} / 4")
-    print(f"  • Byzantine Faults:  {result.get('byzantine_faults', 0)}")
-    print(f"  • Execution Block:   {result.get('block_hash', 'N/A')[:16]}...")
+    print(f"  • Status:            {result['status']}")
+    print(f"  • Execution Block:   {result['digest'][:16]}...")
+
+    # 3. Byzantine round — inject f=1 faulty node; quorum (2f+1) must still hold.
+    fabric.nodes[0].is_faulty = True
+    print(f"\n🗳️  Scenario B — 1 Byzantine node faulty (f={fabric.f}): [{tx_action}] on {tx_target}")
+    result = fabric.verify_and_execute(tx_action, tx_target, tx_payload)
+    print(f"  • Votes Collected:   {result['votes_collected']} / {total_nodes}")
+    print(f"  • Quorum Required:   {result['quorum_required']}")
+    print(f"  • Consensus Reached: {result['consensus_reached']}")
+    print(f"  • Status:            {result['status']}")
 
     print("\n✓ Simulation completed successfully in pure Python standard library.")
 
