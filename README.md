@@ -19,7 +19,7 @@
 
 # 🛡️ Deus PBFT Consensus (`deus-pbft-consensus`)
 
-> **Zero-dependency Practical Byzantine Fault Tolerance consensus state machine for local AI agent workforces.**
+> **Zero-dependency quorum / threshold-signature consensus gate for local AI agent workforces, sized with PBFT's Byzantine-safe math.**
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-0A57D6.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-33CFFF.svg)](https://opensource.org/licenses/MIT)
@@ -30,7 +30,7 @@
 ---
 
 ## 1. What This Is
-Deus PBFT Consensus is a sovereign multi-agent coordination protocol written in pure standard-library Python. It provides mathematical fault tolerance ($N \ge 3f + 1$) for autonomous agent swarms, ensuring no single malfunctioning or hallucinating agent can unilaterally mutate production state.
+Deus PBFT Consensus is a sovereign multi-agent coordination gate written in pure standard-library Python. It applies PBFT's Byzantine-safe cluster sizing ($N \ge 3f + 1$, quorum $= 2f + 1$) to a **single-round quorum vote**: every node signs the proposal digest, the fabric collects the unique signatures, and execution proceeds only if the signature count meets quorum. This tolerates up to $f$ faulty or non-signing nodes, ensuring no single malfunctioning or hallucinating agent can unilaterally mutate production state.
 
 ## 2. Who It Is For
 - **Multi-Agent Architects:** Coordinating agent swarms (Coders, Creators, Verifiers) that require cryptographic consensus before committing changes.
@@ -38,18 +38,24 @@ Deus PBFT Consensus is a sovereign multi-agent coordination protocol written in 
 - **Enterprise DevOps:** Multi-node consensus verification without heavyweight blockchain or distributed database overhead.
 
 ## 3. Current Status
-**Production / Standalone Sovereign Package.** Verified state machine supporting Pre-Prepare, Prepare, and Commit three-phase voting cycles.
+**Production / Standalone Sovereign Package.** Verified single-round quorum consensus gate using PBFT's $N \ge 3f + 1$ / quorum $= 2f + 1$ Byzantine-safe sizing.
 
 ## 4. What Works Now vs Planned
 ### What Works Now:
-- Full Practical Byzantine Fault Tolerance state machine ($N=4$, tolerates $f=1$ faulty node).
-- Multi-phase quorum voting with cryptographic block hashing.
+- Single-round quorum / threshold-signature consensus gate ($N=4$, tolerates $f=1$ faulty or non-signing node).
+- PBFT Byzantine-safe cluster sizing ($N \ge 3f + 1$, quorum $= 2f + 1$) with SHA-256 proposal-digest signing per node.
 - 1-Click quickstart execution via `python3 quickstart.py`.
 - Interactive Jupyter Notebook walkthrough in [`walkthrough.ipynb`](./walkthrough.ipynb).
 - Model-agnostic swarm coordination schemas in [`AGENT_SETUP.md`](./AGENT_SETUP.md).
 
+### Scope / Honest Limitations:
+- This is a **single-round quorum gate**, not a full multi-phase PBFT implementation. It does **not** implement the three-phase (Pre-Prepare / Prepare / Commit) message protocol, view changes, primary election, or sequence numbering.
+- It borrows PBFT's fault-tolerance *sizing* ($N \ge 3f + 1$, quorum $= 2f + 1$) to decide how many agreeing signatures constitute a safe quorum in one voting round.
+- Nodes run in-process; there is no network transport or cross-host message passing between validators yet.
+
 ### Planned:
 - Dynamic node cluster discovery over Tailscale/local network sockets.
+- Optional multi-phase (Pre-Prepare / Prepare / Commit) protocol with view changes for networked deployments.
 
 ## 5. How to View or Use It (30-Second Quickstart)
 No installation required! Zero external pip dependencies:
